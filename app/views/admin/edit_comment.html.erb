@@ -1,0 +1,22 @@
+<div class="col-md-10 col-md-offset-2">
+	<% if notice %>
+		<div id="notice"><%= notice %></div>
+	<% end %>
+	<%= form_for @comment, url: { action: 'update_comment' }, html: { method: :post } do |f|	%>
+		<div id="main-content">
+			<div id="full-content">
+				<h1>Редагувати коментар: </h1>
+				<hr>
+				<%= show_error_messages(@comment) %>
+				<div class="form-group">
+	          <%= f.text_area :content, class: "form-control", rows: 6, placeholder: "Введіть ваш коментар" %>
+	      </div>
+	      
+	      <div class="form-group">
+	        <%= link_to 'До коментарів', comments_admin_path, class: 'btn btn-default' %>
+	        <%= f.submit "Змінити", class: "btn btn-default"%>
+	      </div> 
+      </div>
+		</div>	
+	<% end %>
+</div>

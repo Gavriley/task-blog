@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AdminPanel - TaskBlog</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'checkboxes', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>  
+    <%= csrf_meta_tags %>  
+  </head>
+  <body>
+    <%= render 'layouts/admin_bar' %>
+    <div id="<%= controller_name %>">
+    	<div class="container-fluid">
+  	    <div class="row">
+  				<%= render 'admin/left_sidebar' %>
+  				<%= yield %>
+  			</div>
+  		</div>
+      <%= javascript_include_tag 'sidebar', 'data-turbolinks-track' => true %>	
+      <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+    </div>  
+  </body>
+</html>

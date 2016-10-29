@@ -1,0 +1,72 @@
+<div class="col-md-7 col-md-offset-2">
+	<% if notice %>
+		<div id="notice"><%= notice %></div>
+	<% end %>
+	<div id="main-content">
+		<h2>
+			По запиту "<%= params[:query_user] %>" 
+			<% if @users.any? %>
+				найдено <%= plural_form(@users.total_count, ['результат', 'результати', 'результатів']) %> 
+			<% else %>
+				нічого не знайдено
+			<% end %>		
+		</h2>
+		<hr>
+		<% if @users.any? %>
+			<div id="user-list-block">
+				<table class="table table-striped">
+			    <thead>
+			      <tr>
+			      	<th>Avatar</th>
+			        <th>Login</th>
+			        <th>Name</th>
+			        <th>Email</th>
+			        <th></th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <% @users.each do |user| %>
+				      <tr>
+				      	<td><%= image_tag user.avatar.url(:small) %></td>
+				        <td><%= user.login %></td>
+				        <td><%= user.name %></td>
+				        <td><%= user.email %></td>
+				        <td id="action">
+				        	<%= link_to 'Редагувати', edit_user_admin_path(user), class: 'btn btn-default' %>
+				        	<%= link_to 'Видалити', destroy_user_admin_path(user), method: :delete, data: { confirm: "Ви впевнені?" }, class: 'btn btn-default' %>
+				        </td>
+				      </tr>
+						<% end %>
+			    </tbody>
+		  	</table>
+			</div>
+			<%= paginate @users, :theme => 'admin' %>
+		<% else %>
+			<%= link_to 'Повернутися до списку користувачів', users_admin_path, class: 'btn btn-default' %>
+			<hr>
+		<% end %>
+	</div>
+</div>	
+
+<div class="col-md-3">
+	
+	<div id="right-sidebar">
+		<div id="adding">
+			<h2>Додати користувача: </h2>
+			<hr>
+			<%= link_to 'Добавити користувача', new_user_admin_path, class: 'btn btn-default' %>
+	  </div>  
+	</div>
+
+	<div id="right-sidebar">
+		<div id="search">
+			<h2>Пошук по користувачах: </h2>
+			<hr>
+			<%= form_tag admin_path, method: 'GET' do %>
+	      <%= text_field_tag :query_user, params[:query_user], placeholder: 'Пошук', class: 'form-control' %> 
+	      <%= submit_tag 'Найти', class: 'btn btn-primary' %>
+	    <% end %>
+	  </div>  
+	</div>
+	
+</div>

@@ -1,0 +1,28 @@
+<div class="col-md-10 col-md-offset-2">
+
+	<div id="show-notice">
+		<% if notice %>
+			<div id="notice"><%= notice %></div>
+		<% end %>
+	</div>
+
+	<div id="main-content">
+		<h1>Добавити категорію: </h1>
+		<hr>
+		<%= form_for @category, url: { action: 'create_category' }, remote: true, html: { method: :post }, id: 'category-form-block' do |f|	%>
+			<div id="full-content">
+				<div id="category-form-block">
+					<div id="errors-container"><%= show_error_messages(@category) %></div>
+					<%= f.text_field :name, placeholder: 'Введіть назву категорії', class: 'form-control' %>
+					<%= f.submit 'Створити категорію', class: 'btn btn-primary'  %>
+				</div>
+			</div>	
+		<% end %>
+		<div id="category-list-block">
+			<%= render Category.latest %>
+		</div>
+
+		<%= render 'category_modal' %>
+
+	</div>
+</div>	

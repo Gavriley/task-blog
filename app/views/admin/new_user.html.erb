@@ -1,0 +1,59 @@
+<%= form_for @user, url: { action: 'create_user' }, html: { multipart: true, method: :post } do |f| %>	
+	<div class="col-md-7 col-md-offset-2">
+		<% if notice %>
+			<div id="notice"><%= notice %></div>
+		<% end %>
+		<div id="main-content">
+  			
+			<h1>Створити нового користувача: </h1>
+			<hr>
+			<%= show_error_messages(@user) %>	
+			<div id="user-fields">
+				<div class="form-group">
+		    	<%= f.text_field :login, autofocus: true, placeholder: "Введіть логін", class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+				  <%= f.email_field :email, placeholder: "Введіть e-mail", class: 'form-control' %>
+				</div>
+				  
+				<div class="form-group">
+				  <%= f.text_field :name, placeholder: "Введіть імя", class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+				  <%= f.password_field :password, autocomplete: "off", placeholder: "Введіть пароль", class: 'form-control' %>
+				</div>
+
+				<div class="form-group">
+					<%= link_to 'До користувачів', users_admin_path, class: 'btn btn-default' %>
+					<%= f.submit 'Створити користувача', class: 'btn btn-primary'  %>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="col-md-3">
+
+		<div id="right-sidebar">
+			<div id="params">
+				<h2>Параметри: </h2>
+				<hr>
+				<h3>Аватар: </h3>
+				  
+				<div id="file-block">
+					<%= image_tag nil, id: 'file-tag', style: "display: none" %>
+					<%= link_to 'Видалити аватар', nil, id: 'clear', style: "display: none" %>
+					<%= f.label :avatar, 'Виберіть аватар', class: "btn btn-default", id: "raper_file", for: "file" %>
+					<%= f.file_field :avatar, style: "display:none", id: "file" %>		
+				</div>	
+
+				<hr id="dashed">
+				<%= link_to 'Відмінити', :back, id: 'bottom-link', data: { confirm: "Ви впевнені?" } %>
+				<%= f.submit 'Створити користувача', class: 'btn btn-primary'  %>
+		  </div>  
+		</div>
+
+	</div>	
+<% end %>		

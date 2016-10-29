@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskBlog</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'simple', media: 'all', 'data-turbolinks-track' => true if controller_name == 'posts' || controller_name == 'categories' %>
+    <%= stylesheet_link_tag 'pagination', media: 'all', 'data-turbolinks-track' => true if controller_name == 'posts' || controller_name == 'categories' %>
+    <%= stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track' => true if parent_controller_name == 'devise' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render 'layouts/admin_bar' if current_user.try(:admin) %>
+    <div id="<%= controller_name %>">
+      
+      <% if controller_name == 'posts' %>
+      <%= render 'layouts/simple' %>
+      <% elsif controller_name == 'categories' %>
+      <%= render 'layouts/simple' %>
+      <% elsif parent_controller_name == 'devise' %>
+      <%= render 'layouts/devise' %>  
+      <% else %>
+      <%= yield %>
+      <% end %>
+    </div>
+    <%= javascript_include_tag 'post', 'data-turbolinks-track' => true if controller_name == 'posts' || controller_name == 'categories' %>
+  </body>
+</html>

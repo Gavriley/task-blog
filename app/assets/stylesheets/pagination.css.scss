@@ -1,0 +1,27 @@
+nav.pagination {
+	margin: 0;
+	padding: 0;
+	float: right;
+
+	span {
+		border-top: 4px solid grey;
+		padding: 7px 5px;
+		font-size: 14px;
+		margin: 0px 0px 0px 7px;
+		a {
+			cursor: pointer;
+		}	
+	}
+
+	span:hover {
+		border-top: 4px solid darkred;
+	}
+	
+	span.gap {
+		border-top: none;
+	} 
+
+	span.current {
+		border-top: 4px solid #000;
+	}
+}

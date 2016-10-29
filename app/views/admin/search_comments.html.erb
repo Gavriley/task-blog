@@ -1,0 +1,56 @@
+<div class="col-md-7 col-md-offset-2">
+	<% if notice %>
+		<div id="notice"><%= notice %></div>
+	<% end %>
+	<div id="main-content">
+		<h2>
+			По запиту "<%= params[:query_comment] %>" 
+			<% if @comments.any? %>
+				найдено <%= plural_form(@comments.total_count, ['коментар', 'коментарі', 'коментарів']) %> 
+			<% else %>
+				нічого не знайдено
+			<% end %>		
+		</h2>
+		<hr>
+		<% @comments.each do |comment| %>
+			<div id="comment-block">
+				<span id="action">
+					<%= link_to 'Редагувати', edit_comment_admin_path(comment) %> | 
+					<%= link_to 'Видалити', destroy_comment_admin_path(comment), method: :delete, data: { confirm: "Ви впевнені?" } %>
+				</span>
+				
+				<div><span id="comment-title">Запис:</span> <%= link_to comment.post.title, comment.post %></div>
+				<div><span id="comment-title">Автор:</span> <%= comment.user.login %></div>
+
+				<hr>
+
+				<p><%= strip_tags(comment.content) %></p>
+
+				<hr id="dashed">
+
+				<span id="status"><Дата створення: 
+					<%= comment.created_at.strftime("%d").to_s %> 
+					<%= set_month(comment.created_at.strftime("%m").to_i) %> 
+					<%= comment.created_at.strftime("%Y").to_s %> року, о 
+					<%= comment.created_at.strftime("%H:%M").to_s %>>		
+				</span>
+			</div>
+		<% end %>
+		<%= paginate @comments, :theme => 'admin' %>
+	</div>
+</div>
+
+<div class="col-md-3">
+
+	<div id="right-sidebar">
+		<div id="search">
+			<h2>Пошук по коментарях: </h2>
+			<hr>
+			<%= form_tag admin_path, method: 'GET' do %>
+	      <%= text_field_tag :query_comment, params[:query_comment], placeholder: 'Пошук', class: 'form-control' %> 
+	      <%= submit_tag 'Найти', class: 'btn btn-primary' %>
+	    <% end %>
+	  </div>  
+	</div>
+	
+</div>

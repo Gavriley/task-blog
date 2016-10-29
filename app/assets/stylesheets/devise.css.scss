@@ -1,0 +1,42 @@
+#devise {
+	position: absolute;
+	left: 0;
+	top: 20%;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+
+	#devise-content {
+		background-color: #fff;
+		border: 1px solid #000;
+		border-radius: 15px;
+		margin: auto;
+		width: 40%;
+		padding: 10px 30px 30px 30px;
+		
+		ol, ul {
+			list-style: none;
+		}
+
+		hr {
+			border: 0;
+	    border-bottom: 1px dashed #000;
+		}
+
+		input[type=text], input[type=email], input[type=password] {
+			width: 50%;
+		}
+
+		#error_explanation {
+			padding: 10px;
+			border: 1px dashed red;
+			border-radius: 7px;
+			margin-bottom: 15px;
+
+			ul li:before {
+				margin-left: -15px;
+				content: "\00BB \0020";
+			}
+		}
+	}
+}

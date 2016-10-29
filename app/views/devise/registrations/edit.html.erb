@@ -1,0 +1,36 @@
+<h2>Особистий кабінет</h2>
+<hr>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group">
+    <%= f.text_field :login, autofocus: true, placeholder: "Введіть логін", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.email_field :email, placeholder: "Введіть e-mail", class: 'form-control' %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="form-group">
+    <i>(Залиште поля пустими<br /> якщо не хочете міняти)</i><br />
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Введіть новий пароль", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Підтвердіть новий пароль", class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <i>(Введіть теперішній пароль<br /> для зміни інформації)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off", placeholder: "Введіть поточний пароль", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Оновити профіль", class: 'btn btn-default' %>
+  </div>
+<% end %>
+<%= link_to "-> повернутися на головну", root_path %>

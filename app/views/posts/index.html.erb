@@ -1,0 +1,29 @@
+<%= render 'layouts/sidebar' %>
+<div id="left_column">
+  <% @posts.each do |post| %>
+  <div class="postbody">
+    <h1><%= link_to post.title, post %></h1>
+    <div class="publish_info">Дата публікації: 
+    	<%= post.created_at.strftime("%d").to_s %> 
+			<%= set_month(post.created_at.strftime("%m").to_i) %> 
+			<%= post.created_at.strftime("%Y").to_s %> року
+		</div>
+
+    <p>
+      <% if post.thumbnail.exists? %>
+        <%= link_to post do %>
+          <%= image_tag post.thumbnail.url(:medium), class: 'img-rounded' %>
+        <% end %>       
+      <% end %> 
+
+      <%= truncate(strip_tags(post.content), length: 1200) %>
+    </p>
+    <div id="read-continue"><%= link_to "Читати дальше →", post %></div>
+    <div class="comment">
+      <%= link_to "Коментарі (#{post.comments.count})", post_path(post) + "#post-comment-block" %>
+    </div>
+  </div>
+  <% end %>  
+  <%= paginate @posts, :left => 2, :right => 2, :window => 2 %>
+</div>
+

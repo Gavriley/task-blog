@@ -1,0 +1,45 @@
+<div class="col-md-10 col-md-offset-2">
+	<div id="main-content">
+		<h1>Майстерня </h1>
+		<hr>
+		<div id="dashboard">
+			<div id="last-comments">
+				<span id="info">Останні коментарі</span>
+				<%= link_to 'Перейти до коментарів', comments_admin_path, id: 'go-to' %>
+				<hr>
+				<% @comments.each do |comment| %>
+					<div id="comment-dashboard-block">
+						<div><span id="comment-title">Запис:</span> <%= link_to comment.post.title, comment.post %></div>
+						<div><span id="comment-title">Автор:</span> <%= comment.user.login %></div>
+						<p><%= truncate(strip_tags(comment.content), length: 500) %></p>
+
+					</div>
+				<% end %>
+			</div>
+
+			<div id="right-block">
+				<div id="last-post">	
+					<span id="info">Останні записи</span>
+					<%= link_to 'Перейти до записів', posts_admin_path, id: 'go-to' %>	
+					<hr>
+					<% @posts.each do |post| %>
+						<div id="post-dashboard-block">
+							<h2><%= link_to post.title, post %></h2>
+						</div>
+					<% end %>
+				</div>
+
+				<div id="last-users">
+					<span id="info">Останні зареєстровані користувачі</span>
+					<%= link_to 'Перейти до користувачів', users_admin_path, id: 'go-to' %>	
+					<hr>
+					<% @users.each do |user| %>
+						<div id="user-dashboard-block">
+							<span><%= user.login %> <i><<span><%= user.email %></span>></i></span>
+						</div>
+					<% end %>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>

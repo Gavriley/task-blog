@@ -1,0 +1,34 @@
+
+<h2>Реєстрація користувача</h2>
+<hr>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  
+  <div class="form-group">
+    <%= f.text_field :login, autofocus: true, placeholder: "Введіть логін", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.email_field :email, placeholder: "Введіть e-mail", class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.text_field :name, placeholder: "Введіть імя", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.password_field :password, autocomplete: "off", placeholder: "Введіть пароль", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "Підтвердіть пароль", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Реєстрація", class: 'btn btn-default' %>
+    <%= link_to new_user_session_path do %>
+      <%= submit_tag 'Вхід', class: 'btn btn-default' %>
+    <% end %>
+  </div>
+<% end %>
+<%= link_to "-> повернутися на головну", root_path %>

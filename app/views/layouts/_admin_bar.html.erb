@@ -1,0 +1,21 @@
+<div id="admin-bar">
+	<%= image_tag 'logo.png', id: 'logo' %><%= link_to 'Адмін панель', admin_path, id: 'admin-panel' %>	
+  
+  <%= link_to root_path do %>
+    <%= image_tag 'home.png', id: 'home' %><span>На головну</span>
+  <% end %>
+
+	<%= link_to new_post_admin_path do %>
+    <%= image_tag 'plus.png', id: 'plus' %><span>Добавити запис</span>
+  <% end %>	
+
+  <%= link_to posts_admin_path do %>
+    <%= image_tag 'all_posts.png' %><span>До записів</span>
+  <% end %>	
+
+  <div id="profile">
+  	<%= image_tag 'welcome.png' %><span id="welcome">Вітаємо вас, <%= current_user.login %></span>
+  	<%= image_tag 'exit.png' %><%= link_to 'Вихід', destroy_user_session_path, method: :delete %>
+  </div>
+  
+</div>

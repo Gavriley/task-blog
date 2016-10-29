@@ -1,0 +1,5 @@
+<%= render 'layouts/admin_bar' if current_user.try(:admin) %>
+
+<div id="not-found"> 
+  <%= link_to root_path do image_tag '404.jpg' end %>
+</div>  

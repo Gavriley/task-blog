@@ -1,0 +1,56 @@
+<div id="right_column">
+  <div class="section">
+    <div class="section3_top"></div>
+    <div class="section3_middle">
+      <h2>Пошук по сайту</h2>
+      <%= form_tag posts_path, method: 'GET', id: 'search-form', class: 'navbar-form search-form' do %>
+      <div class="form-group">
+        <%= text_field_tag :query, params[:query], placeholder: 'Пошук', class: 'form-control' %> 
+      </div>
+      <%= submit_tag 'Go', class: 'btn btn-success' %>
+      <% end %>
+    </div>
+    <div class="section3_bottom"></div>
+  </div>
+  <% unless user_signed_in? %>
+  <div class="section">
+    <div class="section2_top"></div>
+    <div class="section2_middle">
+      <h2>Авторизація</h2>
+      <%= form_tag session_path(:user), id: 'search-form', class: 'user-form' do %>
+      <div class="form-group">
+        <%= email_field_tag 'user[email]', nil, placeholder: "Введіть e-mail", class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= password_field_tag 'user[password]', nil, placeholder: "Введіть пароль", class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= check_box_tag 'user[remember_me]' %>
+        <%= label_tag 'user[remember_me]', "Запамятати мене" %>
+      </div>
+      <div class="form-group">
+        <%= submit_tag 'Вхід', class: 'btn btn-default' %>
+        <%= link_to new_registration_path(:user) do %>
+        <%= submit_tag 'Реєстрація', class: 'btn btn-default' %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+    <div class="section2_bottom"></div>
+  </div>
+  <% end %>
+  <% if Category.exists? %>
+  <div class="section">
+    <div class="section1_top"></div>
+    <div class="section1_middle">
+      <h2>Категорії</h2>
+      <ul>
+        <% Category.all.each do |category| %>
+        <li>&raquo; <%= link_to category.name, category %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="section1_bottom"></div>
+  </div>
+  <% end %>
+</div>

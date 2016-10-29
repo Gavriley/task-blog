@@ -1,0 +1,32 @@
+<div id="container_wrapper1">
+  <div id="container_wrapper2">
+    <div id="container">
+      <div id="header">
+        <div id="logo"></div>
+      </div>
+      <div id="menu">
+        <ul>
+          <li><%= link_to "Головна", root_path, class: 'current' %></li>
+          <li><%= link_to "Блог", posts_path %></li>
+          <% if user_signed_in? %>
+          <li><%= link_to 'Кабінет', edit_user_registration_path %></li>
+          <li><%= link_to 'Вихід', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+          <li><%= link_to 'Реєстрація', new_user_registration_path %></li>
+          <li><%= link_to 'Вхід', new_user_session_path  %></li>
+          <% end %>  
+        </ul>
+      </div>
+      <div id="content">
+        <% if notice %>
+        <div id="notice"><%= notice %></div>
+        <% end %>   
+        <%= yield %>
+      </div>
+      <div id="bottom"></div>
+      <div id="footer"> 
+        Copyright © 2016 <%= link_to "Task Blog", root_path %> 
+      </div>
+    </div>
+  </div>
+</div>

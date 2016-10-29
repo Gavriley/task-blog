@@ -1,0 +1,8 @@
+<div id="category-block">
+	<h2><%= category.name %></h2>
+	<div id="action">
+		<%= link_to 'Переглянути', category %> |
+		<a href="" name="<%= category.name %>" data-value="<%= category.id %>" id="category-edit">Редагувати</a> | 
+		<%= link_to 'Видалити', destroy_category_admin_path(category), method: :delete, data: { confirm: "Ви впевнені?" } %>
+	</div>
+</div>

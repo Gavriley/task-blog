@@ -1,0 +1,43 @@
+<div class="col-md-2" id="left-sidebar">
+  <ul id="left-sidebar-menu">
+    <%= link_to admin_path do %>
+      <li value="1">Майстерня</li>
+    <% end %>
+    <a href="">
+      <li value="2">Записи</li>
+    </a>
+    <div id="nested-block-2">
+      <%= link_to posts_admin_path do %>
+        <li id="nested">Всі записи</li>
+      <% end %>
+      <%= link_to new_post_admin_path do %>
+        <li id="nested">Добавити запис</li>
+      <% end %>
+    </div>
+    <a href="">
+      <li value="3">Категорії</li>
+    </a>
+    <div id="nested-block-3">
+      <%= link_to categories_admin_path do %>
+        <li id="nested">Всі категорії</li>
+      <% end %>
+      <%= link_to new_category_admin_path do %>
+        <li id="nested">Добавити категорію</li>
+      <% end %>
+    </div>
+    <%= link_to comments_admin_path do %>
+      <li value="4">Коментарі</li>
+    <% end %>
+    <a href="#">
+      <li value="5">Користувачі</li>
+    </a>
+    <div id="nested-block-5">
+      <%= link_to users_admin_path do %>
+        <li id="nested">Всі користувачі</li>
+      <% end %>
+      <%= link_to new_user_admin_path do %>
+        <li id="nested">Добавити користувача</li>
+      <% end %>
+    </div>
+  </ul>
+</div>

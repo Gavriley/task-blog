@@ -1,0 +1,78 @@
+<%= form_for @post, url: { action: 'create_post' }, html: { multipart: true, method: :post } do |f|	%>
+	<div class="col-md-7 col-md-offset-2">
+		<% if notice %>
+			<div id="notice"><%= notice %></div>
+		<% end %>
+		<div id="main-content">
+			<h1>Створити нову запись: </h1>
+			<hr>
+			
+			<%= show_error_messages(@post) %>
+
+			<div class="form-group">
+				<%= f.text_field :title, placeholder: 'Заголовок', class: 'form-control' %>
+			</div>
+
+			<div class="form-group">
+				<%= f.text_area :content, class: 'form-control', rows: 16 %>	
+			</div>	
+
+			<div class="form-group">
+				<%= link_to 'До записів', posts_admin_path, class: 'btn btn-default' %>
+				<%= f.submit 'Створити запис', class: 'btn btn-primary'  %>
+			</div>	
+		</div>
+	</div>
+	
+	<div class="col-md-3">
+
+		<div id="right-sidebar">
+			<div id="params">
+				<h2>Параметри: </h2>
+				<hr>
+				<h3>Мініатюра: </h3>
+				  
+				<div id="file-block">
+					<%= image_tag nil, id: 'file-tag', style: "display: none" %>
+					<%= link_to 'Видалити зображення', nil, id: 'clear', style: "display: none" %>
+					<%= f.label :thumbnail, 'Виберіть зображення', class: "btn btn-default", id: "raper_file", for: "file" %>
+					<%= f.file_field :thumbnail, style: "display:none", id: "file" %>			
+				</div>
+
+				<hr id="dashed">	
+				<div id="classic-checkboxes">
+					<%= f.check_box :published, { class: 'css-checkbox lrg' }, 'true', 'false' %>
+					<%= f.label :published, 'Опубліковано запис', class: 'css-label lrg checkbox_large' %>
+				</div>
+				<hr id="dashed">
+				<%= link_to 'Відмінити', :back, id: 'bottom-link', data: { confirm: "Ви впевнені?" } %>
+				<%= f.submit 'Створити запис', class: 'btn btn-primary'  %>
+		  </div>  
+		</div>
+		
+		<% if Category.exists? %>
+			<div id="right-sidebar">
+				<div id="select-category">
+					<h2>Вибрати категорії: </h2>
+					<hr>
+					<div id="list-category">
+						<div id="classic-checkboxes">
+							<ul>
+								<% Category.all.each do |category| %>
+									<li>
+										<%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category), 
+											{ class: 'css-checkbox lrg', id: "category_#{category.id}" } %>
+										<%= label_tag "category_#{category.id}", category.name, class: 'css-label lrg checkbox_large' %>	
+									</li>
+								<% end %>
+							</ul>
+						</div>	
+					</div>
+			  </div>  
+			</div>
+		<% end %>
+
+	</div>
+
+<% end %>										
+

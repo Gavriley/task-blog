@@ -1,0 +1,60 @@
+<div id="full_column">
+  <div class="postbody">
+    <h1><%= @post.title %></h1>
+    <div class="publish_info">Дата публікації: 
+    	<%= @post.created_at.strftime("%d").to_s %> 
+			<%= set_month(@post.created_at.strftime("%m").to_i) %> 
+			<%= @post.created_at.strftime("%Y").to_s %> року
+		</div>
+    <p><%= @post.content %></p>
+  </div>
+
+  <div id="post-comment-block">
+    <div id="comment-info">
+      <%= 'На сторінці ' + (@post.comments.any? ? 'присутні ' + plural_form(@post.comments.count, ['коментар', 'коментарі', 'коментарів']) : 'відсутні коментарі') %>
+    </div>
+    <% if can? :create, @comment %>
+      <%= render 'comment_modal' %>
+
+      <%= form_for @comment, url: post_comments_path(@post), html: { method: :post }, remote: true do |f| %>
+        <% if flash[:alert] %>
+          <div id=comment-message><h4><%= flash[:alert] %></h4></div>
+        <% end %>
+        <div id="comment-message-block"></div>
+        <div id="comment-form">
+          <div class="form-group">
+            <%= f.text_area :content, class: "form-control", rows: 6, placeholder: "Введіть ваш коментар" %>
+          </div>
+          <div class="form-group">
+            <input type="reset" class="btn btn-default" value="Очистити">
+            <%= f.submit "Відправити", class: "btn btn-default"%>
+          </div> 
+        </div>
+      <% end %>
+    <% end %>
+    <div id="comment-list-block">
+      <% @post.comments.latest.each do |comment| %>
+        <div id="comment-content">
+          <div id="comment-title">
+            <b>Автор: </b><%= comment.user.login %> 
+            <span id="comment-date">
+              <%= comment.created_at.strftime("%d").to_s %> 
+              <%= set_month(comment.created_at.strftime("%m").to_i) %> 
+              <%= comment.created_at.strftime("%Y").to_s %> року, о
+              <%= comment.created_at.strftime("%H:%M").to_s %>
+            </span>
+            <% if can? :update, comment %>
+            <div id="comment-actions">
+              <a href="" id="comment-edit" data-value="<%= comment.id %>" data-post="<%= @post.id %>">Редагувати</a> | 
+              <%= link_to 'Видалити', post_comment_path(@post, comment), remote: true, method: :delete, data: { confirm: 'Видалити коментар? ' }%>
+            </div>
+            <% end %>
+          </div>
+          <%= image_tag comment.user.avatar.url(:small) %>
+          <div><%= comment.content %></div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

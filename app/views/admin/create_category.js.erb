@@ -1,0 +1,7 @@
+<% if @category.errors.any? %>
+	$("#errors-container").html("<%= show_error_messages(@category) %>");
+<% else %>
+	$("#errors-container").html(null);
+	$("#show-notice").html("<div id='notice'><%= @category.name %> успішно створена.</div>");
+	$("<%= escape_javascript(render @category) %>").prependTo("#category-list-block");
+<% end %>

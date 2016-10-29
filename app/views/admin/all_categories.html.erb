@@ -1,0 +1,27 @@
+<div class="col-md-7 col-md-offset-2">
+	<% if notice %>
+		<div id="notice"><%= notice %></div>
+	<% end %>
+	<div id="main-content">
+		<h1>Список категорій блогу: </h1>
+		<hr>
+		<div id="category-list-block">
+			<%= render @categories %>
+		</div>
+
+		<%= render 'category_modal' %>
+
+	</div>
+</div>	
+
+<div class="col-md-3">
+	
+	<div id="right-sidebar">
+		<div id="adding">
+			<h2>Додати категорію: </h2>
+			<hr>
+			<%= link_to 'Добавити категорію', new_category_admin_path, class: 'btn btn-default' %>
+	  </div>  
+	</div>
+	
+</div>
